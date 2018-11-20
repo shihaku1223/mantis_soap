@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
 from mantisconnect.connector import MantisSoapConnector
@@ -19,6 +19,24 @@ class IssueViewer:
             return None
 
         return self._issue['attachments']
+
+    def getProjectId(self):
+        return self._issue['project']['id']
+
+    def getProjectName(self):
+        return self._issue['project']['name']
+
+    def getReporter(self):
+        return self._issue['reporter']
+
+    def getReporterRealName(self):
+        return self._issue['reporter']['real_name']
+
+    def getReporterName(self):
+        return self._issue['reporter']['name']
+
+    def getReporterEmail(self):
+        return self._issue['reporter']['email']
 
     # return datetime.datetime object
     def getLastUpdatedTime(self):
