@@ -8,6 +8,9 @@ class IssueViewer:
     def __init__(self, issue):
         self._issue = issue
 
+    def getId(self):
+        return self._issue['id']
+
     def getNotes(self):
         if len(self._issue['notes']) == 0:
             return None
@@ -37,6 +40,9 @@ class IssueViewer:
 
     def getReporterEmail(self):
         return self._issue['reporter']['email']
+
+    def getDescription(self):
+        return self._issue['description']
 
     # return datetime.datetime object
     def getLastUpdatedTime(self):

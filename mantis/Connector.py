@@ -26,6 +26,13 @@ class Connector:
             return None
         return project
 
+    def getIssueAttachment(self, id):
+        attachment = self._mc.client.service.mc_issue_attachment_get(
+            self._mc.user_name,
+            self._mc.user_passwd,
+            id)
+        return attachment
+
     def getProjectIssues(self, projectId, page = 0, itemPerPage = 50):
         mc = self._mc
 
