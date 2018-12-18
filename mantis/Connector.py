@@ -42,3 +42,26 @@ class Connector:
             projectId, page, itemPerPage)
 
         return issues
+
+    def getProjectUsers(self, projectId):
+        mc = self._mc
+
+        users = self._mc.client.service.mc_project_get_users(
+            mc.user_name,
+            mc.user_passwd,
+            projectId, 0)
+        return users
+
+    def addNote(self, issueId, accountData, message):
+        mc = self._mc
+
+        noteType = self._mc.client.get_type('ns0:IssueNoteData')
+        note = noteType(reporter = accountData, text = message)
+
+        response = self._mc.client.service.mc_issue_note_add(
+            mc.user_name,
+            mc.user_passwd,
+            issueId,
+            note)
+
+        return response

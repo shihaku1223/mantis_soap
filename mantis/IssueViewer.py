@@ -23,6 +23,9 @@ class IssueViewer:
 
         return self._issue['attachments']
 
+    def getSubmittedDate(self):
+        return self._issue['date_submitted']
+
     def getProjectId(self):
         return self._issue['project']['id']
 
