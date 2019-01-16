@@ -15,7 +15,13 @@ class IssueViewer:
         if len(self._issue['notes']) == 0:
             return None
 
-        return issue['notes']
+        return self._issue['notes']
+
+    def getStateName(self):
+        return self._issue['view_state']['name']
+
+    def getCategory(self):
+        return self._issue['category']
 
     def getAttachments(self):
         if len(self._issue['attachments']) == 0:
