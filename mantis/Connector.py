@@ -65,3 +65,19 @@ class Connector:
             note)
 
         return response
+
+    def updateIssueState(self, issueId, stateId):
+        mc = self._mc
+
+        stateType = self._mc.client.get_type('ns0:ObjectRef')
+        state = stateType(id = stateId)
+        issueType = self._mc.client.get_type('ns0:IssueData')
+        issue = issueType(reporter = accountData, text = message)
+
+        response = self._mc.client.service.mc_issue_update(
+            mc.user_name,
+            mc.user_passwd,
+            issueId,
+            issue)
+
+        return response
