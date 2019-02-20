@@ -90,3 +90,27 @@ class Connector:
             issue)
 
         return response
+
+    def updateIssueProjectId(self, originIssue, projectId):
+        mc = self._mc
+
+        objType = mc.client.get_type('ns0:ObjectRef')
+        project = objType(id = projectId)
+        category = originIssue['category']
+        reporter = originIssue['reporter']
+
+        issueType = self._mc.client.get_type('ns0:IssueData')
+        issue = issueType(
+            project = project,
+            category = category,
+            summary = originIssue['summary'],
+            description = originIssue['description'],
+            reporter = reporter)
+
+        response = mc.client.service.mc_issue_update(
+            mc.user_name,
+            mc.user_passwd,
+            originIssue['id'],
+            issue)
+
+        return response

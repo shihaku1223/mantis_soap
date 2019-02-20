@@ -3,6 +3,7 @@
 
 from mantis.Connector import Connector
 from mantis.IssueViewer import IssueViewer
+from mantis.Utils import changeIssueProject
 
 from mantisconnect.project import Issue
 
@@ -16,12 +17,18 @@ if __name__ == '__main__':
     connector.connect()
 
     print("Mantis SOAP MC Version:" + connector.getVersion())
-    issue = connector.getIssue(31286)
+    issue = connector.getIssue(30123)
     viewer = IssueViewer(issue)
     print(viewer.getLastUpdatedTime())
+    print(viewer.getProjectName())
 
     projectId = connector.getProjectId('CV2K_App')
     print("ProjectId: " + str(projectId))
 
     issues = connector.getProjectIssues(projectId)
     print("Issues count:"+ str(len(issues)))
+
+    #projectId = connector.getProjectId('sandbox_integ')
+    projectId = connector.getProjectId('TEST')
+    print(projectId)
+    changeIssueProject(connector, 30123, projectId)
