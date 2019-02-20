@@ -23,6 +23,9 @@ class IssueViewer:
     def getStatusName(self):
         return self._issue['status']['name']
 
+    def getStatusId(self):
+        return self._issue['status']['id']
+
     def getCategory(self):
         return self._issue['category']
 

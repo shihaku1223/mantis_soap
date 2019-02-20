@@ -66,18 +66,27 @@ class Connector:
 
         return response
 
-    def updateIssueState(self, issueId, stateId):
+    def updateIssueStatus(self, originIssue, accountData, statusId):
         mc = self._mc
 
-        stateType = self._mc.client.get_type('ns0:ObjectRef')
-        state = stateType(id = stateId)
+        objType = self._mc.client.get_type('ns0:ObjectRef')
+
+        status = objType(id = statusId)
+        project = objType(id = originIssue['project']['id'])
+        category = originIssue['category']
+
         issueType = self._mc.client.get_type('ns0:IssueData')
-        issue = issueType(reporter = accountData, text = message)
+        issue = issueType(
+            project = project,
+            category = category,
+            summary = originIssue['summary'],
+            description = originIssue['description'],
+            reporter = accountData, status = status)
 
         response = self._mc.client.service.mc_issue_update(
             mc.user_name,
             mc.user_passwd,
-            issueId,
+            originIssue['id'],
             issue)
 
         return response
