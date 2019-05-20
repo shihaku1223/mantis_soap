@@ -6,15 +6,8 @@ from mantis.Connector import Connector
 def updateIssueStatus(connector, issueId, statusId):
 
     issue = connector.getIssue(issueId)
-    projectId = connector.getProjectId(options.project)
-    users = connector.getProjectUsers(projectId)
 
-    reporter = None
-    for user in users:
-        if user['name'] == options.username:
-            reporter = user
-
-    print_flush(connector.updateIssueStatus(issue, reporter, statusId))
+    print_flush(connector.updateIssueStatus(issue, statusId))
 
 def addNote(connector, issueId, message):
 
