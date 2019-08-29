@@ -13,7 +13,7 @@ import datetime
 if __name__ == '__main__':
 
     url = "http://osoft-de-c.olympus.co.jp/mantis/ipf3/app/api/soap/mantisconnect.php?wsdl"
-    connector = Connector(url, "10079186", "vp5QmS1223")
+    connector = Connector(url, "10079186", "123")
     connector.connect()
 
     print("Mantis SOAP MC Version:" + connector.getVersion())
