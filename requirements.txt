@@ -1,2 +1,3 @@
 mantisconnect
 zeep
+python-magic

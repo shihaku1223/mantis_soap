@@ -62,6 +62,20 @@ class Connector:
             projectId, 0)
         return users
 
+    def addAttachment(self, issueId, file_name, file_type, base64):
+        mc = self._mc
+
+        response = self._mc.client.service.mc_issue_attachment_add(
+            mc.user_name,
+            mc.user_passwd,
+            issueId,
+            file_name,
+            file_type,
+            base64)
+
+        return response
+
+
     def addNote(self, issueId, accountData, message):
         mc = self._mc
 
