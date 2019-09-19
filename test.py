@@ -15,7 +15,7 @@ import zeep
 if __name__ == '__main__':
 
     url = "http://osoft-de-c.olympus.co.jp/mantis/ipf3/app/api/soap/mantisconnect.php?wsdl"
-    connector = Connector(url, "ipf3-system", "iY59RsDn")
+    connector = Connector(url, "10079186", "123")
     connector.connect()
 
     #print("Mantis SOAP MC Version:" + connector.getVersion())
