@@ -27,7 +27,8 @@ if __name__ == '__main__':
     print(viewer.getProjectName())
 
     print(viewer.getAttachments())
-    print(Utils.addAttachment(connector, 41958, './log.log'))
+    #print(Utils.addAttachment(connector, 41958, './log.log'))
+    Utils.downloadAttachment(connector, 47187, 'attachment')
 
     '''
     accountType = connector._mc.client.get_type('ns0:AccountData')

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 import base64
-import magic
+import mimetypes
 from pathlib import Path
 
-from mantis.Connector import Connector
+from mantis_soap.Connector import Connector
 
 def updateIssueStatus(connector, issueId, statusId):
 
@@ -28,12 +28,12 @@ def changeIssueProject(connector, issueId, projectId):
 def addAttachment(connector, issueId, filePath):
 
     p = Path(filePath)
-    mime = magic.Magic(mime=True)
-    mimeType = mime.from_file(filePath)
+    mimeType = mimetypes.guess_type(filePath)[0]
 
     base64String = None
-    with open(filePath, 'rb') as file:
-        base64String = base64.b64encode(file.read())
+    with open(filePath, 'rb') as f:
+        binary = f.read()
+        base64String = base64.b64encode(binary).decode()
 
     return connector.addAttachment(issueId, p.name, mimeType, base64String)
 

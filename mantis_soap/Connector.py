@@ -4,10 +4,15 @@
 from mantisconnect.connector import MantisSoapConnector
 from mantisconnect.project import Issue
 
+from suds.client import Client
+
 class Connector:
     def __init__(self, url, username, password):
         self._mc = MantisSoapConnector(url)
         self._mc.set_user_passwd(username, password)
+
+        # another client for issue_attachment_add
+        self._client = Client(url)
 
     def connect(self):
         self._mc.connect()
@@ -65,7 +70,7 @@ class Connector:
     def addAttachment(self, issueId, file_name, file_type, base64):
         mc = self._mc
 
-        response = self._mc.client.service.mc_issue_attachment_add(
+        response = self._client.service.mc_issue_attachment_add(
             mc.user_name,
             mc.user_passwd,
             issueId,
