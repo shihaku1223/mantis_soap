@@ -17,6 +17,10 @@ class IssueViewer:
 
         return self._issue['notes']
 
+
+    def getSummary(self):
+        return self._issue['summary']
+
     def getViewStateName(self):
         return self._issue['view_state']['name']
 

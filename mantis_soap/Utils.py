@@ -19,6 +19,17 @@ def addNote(connector, issueId, name, message):
 
     return connector.addNote(issueId, accountData, message)
 
+def addIssue(connector, projectId, reporter_name,
+        category, summary, description,
+        severity = None, option_fields = None):
+
+    accountType = connector._mc.client.get_type('ns0:AccountData')
+    accountData = accountType(name = reporter_name)
+
+    return connector.addIssue(projectId, category,
+            summary, description,
+            accountData, severity)
+
 def changeIssueProject(connector, issueId, projectId):
     issue = connector.getIssue(issueId)
     users = connector.getProjectUsers(projectId)

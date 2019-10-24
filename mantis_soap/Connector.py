@@ -31,6 +31,13 @@ class Connector:
             return None
         return project
 
+    def getProjectCategories(self, projectId):
+
+        return self._mc.client.service.mc_project_get_categories(
+            self._mc.user_name,
+            self._mc.user_passwd,
+            projectId)
+
     def getIssuesByFilter(self, projectId, filter_id, page, per_page):
 
         return self._mc.client.service.mc_filter_get_issues(
@@ -80,6 +87,41 @@ class Connector:
 
         return response
 
+    def addIssue(self, projectId, category,
+            summary, description, reporter,
+            severity = None):
+        mc = self._mc
+
+        issueType = self._mc.client.get_type('ns0:IssueData')
+        objType = self._mc.client.get_type('ns0:ObjectRef')
+
+        #status = objType(id = statusId)
+        project = objType(id = projectId)
+        #statusId = objType(id = statusId)
+        issue = issueType(
+            project = project,
+            category = category,
+            summary = summary,
+            description = description,
+            reporter = reporter)
+
+        response = self._mc.client.service.mc_issue_add(
+            mc.user_name,
+            mc.user_passwd,
+            issue)
+
+        return response
+
+
+    def deleteIssue(self, issueId):
+        mc = self._mc
+
+        response = self._mc.client.service.mc_issue_delete(
+            mc.user_name,
+            mc.user_passwd,
+            issueId)
+
+        return response
 
     def addNote(self, issueId, accountData, message):
         mc = self._mc
