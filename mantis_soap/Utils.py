@@ -36,6 +36,11 @@ def changeIssueProject(connector, issueId, projectId):
 
     return connector.updateIssueProjectId(issue, projectId)
 
+def updateIssueSummary(connector, issueId, summary):
+    issue = connector.getIssue(issueId)
+
+    return connector.updateIssueSummary(issue, summary)
+
 def addAttachment(connector, issueId, filePath):
 
     p = Path(filePath)
