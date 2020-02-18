@@ -12,6 +12,9 @@ class IssueViewer:
         return self._issue['id']
 
     def getNotes(self):
+        if self._issue['notes'] is None:
+            return None
+
         if len(self._issue['notes']) == 0:
             return None
 

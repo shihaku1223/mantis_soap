@@ -20,11 +20,17 @@ if __name__ == '__main__':
     connector.connect()
 
     print("Mantis SOAP MC Version:" + connector.getVersion())
-    issue = connector.getIssue(41958)
-    print(issue)
+
+    projectId = connector.getProjectId('CV2KApp窓口')
+    print(projectId)
+    issue = connector.getIssue(40507)
+
     viewer = IssueViewer(issue)
+    print(viewer.getSummary())
     print(viewer.getLastUpdatedTime())
     print(viewer.getProjectName())
+    Utils.updateIssueSummary(connector, 40507, 'HiHi')
+    sys.exit(0)
 
     print(viewer.getAttachments())
     #print(Utils.addAttachment(connector, 41958, './log.log'))
