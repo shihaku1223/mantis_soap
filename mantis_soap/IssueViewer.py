@@ -30,12 +30,18 @@ class IssueViewer:
         return self._issue['status']['name']
 
     def getHandlerRealName(self):
+        if self._issue['handler'] is None:
+            return None
         return self._issue['handler']['real_name']
 
     def getHandlerEmail(self):
+        if self._issue['handler'] is None:
+            return None
         return self._issue['handler']['email']
 
     def getHandlerId(self):
+        if self._issue['handler'] is None:
+            return None
         return self._issue['handler']['id']
 
     def getStatusId(self):
