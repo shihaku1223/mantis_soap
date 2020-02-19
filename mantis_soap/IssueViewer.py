@@ -29,6 +29,15 @@ class IssueViewer:
     def getStatusName(self):
         return self._issue['status']['name']
 
+    def getHandlerRealName(self):
+        return self._issue['handler']['real_name']
+
+    def getHandlerEmail(self):
+        return self._issue['handler']['email']
+
+    def getHandlerId(self):
+        return self._issue['handler']['id']
+
     def getStatusId(self):
         return self._issue['status']['id']
 
