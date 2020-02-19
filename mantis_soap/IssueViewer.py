@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
-from mantisconnect.connector import MantisSoapConnector
 from mantisconnect.project import Issue
 
 class IssueViewer:
@@ -32,6 +31,12 @@ class IssueViewer:
 
     def getStatusId(self):
         return self._issue['status']['id']
+
+    def getSeverityId(self):
+        return self._issue['severity']['id']
+
+    def getSeverityName(self):
+        return self._issue['severity']['name']
 
     def getCategory(self):
         return self._issue['category']
@@ -65,6 +70,21 @@ class IssueViewer:
 
     def getDescription(self):
         return self._issue['description']
+
+    def getResolutionName(self):
+        return self._issue['resolution']['name']
+
+    def getResolutionId(self):
+        return self._issue['resolution']['id']
+
+    def getCustomFieldValueByName(self, name):
+        customfieldList = self._issue['custom_fields']
+
+        for field in customfieldList:
+            if field['field']['name'] == name:
+                return field['value']
+
+        return None
 
     # return datetime.datetime object
     def getLastUpdatedTime(self):

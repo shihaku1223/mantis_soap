@@ -1,15 +1,32 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
-from mantisconnect.connector import MantisSoapConnector
+#from mantisconnect.connector import MantisSoapConnector
 from mantisconnect.project import Issue
 
 from suds.client import Client
+from zeep import Client as ZeepClient
+from zeep import Settings
+
+class SoapClient:
+    def __init__(self, url, user, password):
+        self._mantis_url = url
+        self.client = None
+        self.user_name = user
+        self.user_passwd = password
+        self.version = None
+
+    def connect(self):
+        settings = Settings(strict=False, xml_huge_tree=True)
+        self.client = ZeepClient(self._mantis_url, settings = settings)
+
+        self.version = self.client.service.mc_version()
 
 class Connector:
     def __init__(self, url, username, password):
-        self._mc = MantisSoapConnector(url)
-        self._mc.set_user_passwd(username, password)
+        self._mc = SoapClient(url, username, password)
+        #self._mc = MantisSoapConnector(url)
+        #self._mc.set_user_passwd(username, password)
 
         # another client for issue_attachment_add
         self._client = Client(url)
@@ -21,11 +38,13 @@ class Connector:
         return self._mc.version
 
     def getIssue(self, id):
-        issue = self._mc.request_issue_get(id)
+        issue = self._mc.client.service.mc_issue_get(
+            self._mc.user_name, self._mc.user_passwd, id)
         return issue
 
     def getProjectId(self, name):
-        project = self._mc.request_project(name)
+        project = self._mc.client.service.mc_project_get_id_from_name(
+            self._mc.user_name, self._mc.user_passwd, name)
 
         if project == 0:
             return None
