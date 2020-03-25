@@ -12,6 +12,13 @@ def updateIssueStatus(connector, issueId, statusId):
 
     return connector.updateIssueStatus(issue, statusId)
 
+
+def updateIssueHandler(connector, issue, account_name):
+    accountType = connector._mc.client.get_type('ns0:AccountData')
+    accountData = accountType(name = account_name)
+
+    return connector.updateIssueHandler(issue, accountData)
+
 def addNote(connector, issueId, name, message):
 
     accountType = connector._mc.client.get_type('ns0:AccountData')

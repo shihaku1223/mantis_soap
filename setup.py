@@ -11,7 +11,7 @@ install_requires = [
 
 setuptools.setup(
     name="mantis_soap",
-    version="0.2.7",
+    version="0.2.8",
     author="Shih-Po Wang",
     author_email="sibo.wang@ot.olympus.co.jp",
     description="The Python binding Mantis SOAP API",

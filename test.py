@@ -5,6 +5,7 @@ import sys
 from mantis_soap.Connector import Connector
 from mantis_soap.IssueViewer import IssueViewer
 from mantis_soap.Utils import changeIssueProject
+from mantis_soap.Utils import updateIssueHandler
 from mantis_soap import Utils
 
 from mantisconnect.project import Issue
@@ -16,7 +17,7 @@ import zeep
 if __name__ == '__main__':
 
     url = "http://osoft-de-c.olympus.co.jp/mantis/ipf3/app/api/soap/mantisconnect.php?wsdl"
-    connector = Connector(url, "10079186", "123")
+    connector = Connector(url, "user", "pass")
     connector.connect()
 
     print("Mantis SOAP MC Version:" + connector.getVersion())
@@ -24,13 +25,13 @@ if __name__ == '__main__':
     projectId = connector.getProjectId('CV2KApp窓口')
     print(projectId)
     issue = connector.getIssue(40507)
+    updateIssueHandler(connector, issue, 'otv_sony')
 
     viewer = IssueViewer(issue)
     print(viewer.getSummary())
     print(viewer.getLastUpdatedTime())
     print(viewer.getProjectName())
-    Utils.updateIssueSummary(connector, 40507, 'HiHi')
-    sys.exit(0)
+    #Utils.updateIssueSummary(connector, 40507, 'HiHi')
 
     print(viewer.getAttachments())
     #print(Utils.addAttachment(connector, 41958, './log.log'))
