@@ -25,7 +25,7 @@ if __name__ == '__main__':
     projectId = connector.getProjectId('CV2KApp窓口')
     print(projectId)
     issue = connector.getIssue(40507)
-    updateIssueHandler(connector, issue, 'otv_sony')
+    print(updateIssueHandler(connector, 40507, 'otv_sony'))
 
     viewer = IssueViewer(issue)
     print(viewer.getSummary())
