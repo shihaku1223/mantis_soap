@@ -169,6 +169,7 @@ class Connector:
             project = project,
             category = category,
             summary = originIssue['summary'],
+            reporter = originIssue['reporter'],
             handler = accountData,
             description = originIssue['description'])
 

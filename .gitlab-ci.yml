@@ -1,0 +1,15 @@
+stages:
+  - deploy
+  
+deploy:
+  image: ubuntu-runner
+  stage: deploy
+  tags:
+    - linux
+  script:
+    - pip3 install twine
+    - ./deploy.sh
+  artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    paths:
+      - dist/
