@@ -1,14 +1,25 @@
 stages:
-  - deploy
+  - run
   
-deploy:
+run:
   image: ubuntu-runner
-  stage: deploy
+  stage: run
   tags:
     - linux
   script:
-    - pip3 install twine
-    - ./deploy.sh
+    - |
+      cat >~/.pypirc<<EOF
+      [distutils]
+      index-servers =
+        nexus
+
+      [nexus]
+      repository = http://nexus3-nexus.ape.hon.olympus.co.jp/nexus_01/repository/ipf3-pypi-hosted/
+      username = $user
+      password = $pass
+      EOF
+    - python3 setup.py sdist bdist_wheel
+    - python3 -m twine upload -r nexus dist/*
   artifacts:
     name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
