@@ -54,6 +54,8 @@ def addAttachment(connector, issueId, filePath):
 
     p = Path(filePath)
     mimeType = mimetypes.guess_type(filePath)[0]
+    if mimeType is None:
+        mimeType = 'application/octet-stream'
 
     base64String = None
     with open(filePath, 'rb') as f:
